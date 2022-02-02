@@ -15,6 +15,7 @@ class CarControllerParams:
   STEER_ERROR_MAX = 350           # max delta between torque cmd and torque motor
 
 class CAR:
+  CX3 = "MAZDA CX-3"
   CX5 = "MAZDA CX-5"
   CX9 = "MAZDA CX-9"
   MAZDA3 = "MAZDA 3"
@@ -35,6 +36,26 @@ class Buttons:
 
 
 FW_VERSIONS = {
+  CAR.CX3: {
+    (Ecu.eps, 0x730, None): [
+      b'DL8V-321K2-A\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',
+    ],
+    (Ecu.engine, 0x7e0, None): [
+      b'PA03-188K2-F\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',
+    ],
+    (Ecu.fwdRadar, 0x764, None): [
+      b'K131-67XK2-A\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',
+    ],
+    (Ecu.esp, 0x760, None): [
+      b'D24R-437K2-B\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',
+    ],
+    (Ecu.fwdCamera, 0x706, None): [
+      b'B61L-67XK2-S\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',
+    ],
+    (Ecu.transmission, 0x7e1, None): [
+      b'PA03-21PS1-A\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',
+    ],
+  },
   CAR.CX5: {
     (Ecu.eps, 0x730, None): [
       b'KJ01-3210X-G-00\x00\x00\x00\x00\x00\x00\x00\x00\x00',
@@ -237,6 +258,7 @@ FW_VERSIONS = {
 
 
 DBC = {
+  CAR.CX3: dbc_dict('mazda_2017', None),
   CAR.CX5: dbc_dict('mazda_2017', None),
   CAR.CX9: dbc_dict('mazda_2017', None),
   CAR.MAZDA3: dbc_dict('mazda_2017', None),
@@ -245,7 +267,7 @@ DBC = {
 }
 
 # Gen 1 hardware: same CAN messages and same camera
-GEN1 = {CAR.CX5, CAR.CX9, CAR.CX9_2021, CAR.MAZDA3, CAR.MAZDA6}
+GEN1 = {CAR.CX3, CAR.CX5, CAR.CX9, CAR.CX9_2021, CAR.MAZDA3, CAR.MAZDA6}
 
 # Cars with a steering lockout
 STEER_LOCKOUT_CAR = {CAR.CX5, CAR.CX9, CAR.MAZDA3, CAR.MAZDA6}
