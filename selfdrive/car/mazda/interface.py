@@ -22,14 +22,21 @@ class CarInterface(CarInterfaceBase):
     ret.safetyConfigs = [get_safety_config(car.CarParams.SafetyModel.mazda)]
     ret.radarOffCan = True
 
-    ret.dashcamOnly = candidate not in (CAR.CX9_2021,)
+    ret.dashcamOnly = false
 
     ret.steerActuatorDelay = 0.1
     ret.steerRateCost = 1.0
     ret.steerLimitTimer = 0.8
     tire_stiffness_factor = 0.70   # not optimized yet
 
-    if candidate == CAR.CX5:
+    if candidate == CAR.CX3:
+      ret.mass = 2900 * CV.LB_TO_KG + STD_CARGO_KG
+      ret.wheelbase = 2.6
+      ret.steerRatio = 14
+      ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
+      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.19], [0.019]]
+      ret.lateralTuning.pid.kf = 0.00006
+    elif candidate == CAR.CX5:
       ret.mass = 3655 * CV.LB_TO_KG + STD_CARGO_KG
       ret.wheelbase = 2.7
       ret.steerRatio = 15.5
